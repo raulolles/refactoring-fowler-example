@@ -30,26 +30,48 @@ public class Customer {
 		return _name;
 	};
 
-	public String statement() {
+	public String statement(Boolean isHtml) {
+		String iniH1,finH1, iniH2, finH2, iniP, finP, tab, saltoLin;
+		
+		if (isHtml) {
+			iniH1="<h1>";
+			iniH2="<h2>";
+			iniP="<p>";
+			finH1="</h1>";
+			finH2="</h2>";
+			finP="</p>";
+			tab=" ";
+			saltoLin ="";
+		} else {
+			iniH1 = "";
+			finH1 = "";
+			iniH2 = "";
+			finH2 = "";
+			iniP = "";
+			finP = "";
+			tab = "\t";
+			saltoLin = "\n";
+		}
+		
 		double totalAmount = 0;
 		int frequentRenterPoints = 0;
 		Iterator<Rental> rentals = _rentals.iterator();
-		String result = "Rental Record for " + getName() + "\n";
+		String result = iniH1 + "Rental Record for " + getName() +  finH1 + saltoLin;
 		while (rentals.hasNext()) {
 			double thisAmount = 0;
 			Rental each = rentals.next();
 			thisAmount = each.getCharge();
-			
 			frequentRenterPoints += each.getFrecuentRenterPoints();
+			
 			// show figures for this rental
-			result += "\t" + each.getMovie().getTitle() + "\t"
-					+ String.valueOf(thisAmount) + "\n";
+			result += iniH2 + tab +  each.getMovie().getTitle() + tab
+					+ String.valueOf(thisAmount) + finH2 + saltoLin;
 			totalAmount += thisAmount;
 		}
 		// add footer lines
-		result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
-		result += "You earned " + String.valueOf(frequentRenterPoints)
-				+ " frequent renter points";
+		result += iniP + "Amount owed is " + String.valueOf(totalAmount) + finP + saltoLin;
+		result += iniP + "You earned " + String.valueOf(frequentRenterPoints)
+				+ " frequent renter points" + finP;
 		return result;
 	}
 }
