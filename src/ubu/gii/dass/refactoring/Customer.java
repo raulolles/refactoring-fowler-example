@@ -38,7 +38,7 @@ public class Customer {
 		while (rentals.hasNext()) {
 			double thisAmount = 0;
 			Rental each = rentals.next();
-			thisAmount = each.amountFor();
+			thisAmount = each.getCharge();
 			
 			// add frequent renter points
 			frequentRenterPoints++;
