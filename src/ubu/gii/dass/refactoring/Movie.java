@@ -18,7 +18,7 @@ public class Movie {
 
 	public Movie(String title, int priceCode) {
 		_title = title;
-		_priceCode = priceCode;
+		setPriceCode (priceCode);
 	}
 
 	public int getPriceCode() {
@@ -27,6 +27,17 @@ public class Movie {
 
 	public void setPriceCode(int arg) {
 		_priceCode = arg;
+		switch(arg){
+		case MovieType.CHILDRENS:
+			_movieType = new Children();
+			break;
+		case MovieType.NEW_RELEASE:
+			_movieType = new NewRelease();
+			break;
+		case MovieType.REGULAR:
+			_movieType = new Regular();
+			break;
+		}
 	}
 
 	public String getTitle() {
@@ -34,24 +45,7 @@ public class Movie {
 	}
 
 	public double getCharge(Rental rental) {
-		double result = 0;
-		// determine amounts for each line
-		switch (rental.getMovie().getPriceCode()) {
-		case MovieType.REGULAR:
-			result += 2;
-			if (rental.getDaysRented() > 2)
-				result += (rental.getDaysRented() - 2) * 1.5;
-			break;
-		case MovieType.NEW_RELEASE:
-			result += rental.getDaysRented() * 3;
-			break;
-		case MovieType.CHILDRENS:
-			result += 1.5;
-			if (rental.getDaysRented() > 3)
-				result += (rental.getDaysRented() - 3) * 1.5;
-			break;
-		}
-		return result;
+		return _movieType.getCharge(rental);
 	}
 
 	public int getFrecuentRenterPoints(Rental rental) {

@@ -11,4 +11,6 @@ public abstract class MovieType {
 	}
 
 	public abstract int getTypeCode();
+
+	public abstract double getCharge(Rental rental);
 }
