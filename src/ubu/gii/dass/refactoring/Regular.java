@@ -4,6 +4,6 @@ public class Regular extends MovieType {
 
 	@Override
 	public int getTypeCode() {
-		return Movie.REGULAR;
+		return MovieType.REGULAR;
 	}
 }
