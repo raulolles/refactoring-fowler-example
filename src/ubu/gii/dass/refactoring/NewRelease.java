@@ -1,5 +1,5 @@
 package ubu.gii.dass.refactoring;
 
-public class NewRelease extends MoviType {
+public class NewRelease extends MovieType {
 
 }
